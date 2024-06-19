@@ -26,13 +26,17 @@ class Lesson(models.Model):
     name = models.CharField(
         max_length=150, verbose_name="Название", help_text="Введите название урока"
     )
-    description = models.TextField(verbose_name="Описание")
+    description = models.TextField(verbose_name="Описание", **NULLABLE)
     preview = models.ImageField(
         upload_to="materials/", verbose_name="Превью", **NULLABLE
     )
     url = models.URLField(verbose_name="Ссылка на видео", **NULLABLE)
     course = models.ForeignKey(
-        Course, on_delete=models.CASCADE, verbose_name="Курс", related_name="lesson"
+        Course,
+        on_delete=models.CASCADE,
+        verbose_name="Курс",
+        related_name="lesson",
+        **NULLABLE,
     )
 
     def __str__(self):
