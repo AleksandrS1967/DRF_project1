@@ -8,33 +8,54 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('materials', '0002_alter_lesson_course_alter_lesson_description'),
-        ('users', '0003_payment'),
+        ("materials", "0002_alter_lesson_course_alter_lesson_description"),
+        ("users", "0003_payment"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='payment',
-            options={'verbose_name': 'Оплата', 'verbose_name_plural': 'Оплата'},
+            name="payment",
+            options={"verbose_name": "Оплата", "verbose_name_plural": "Оплата"},
         ),
         migrations.AlterField(
-            model_name='payment',
-            name='paid_course',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='materials.course', verbose_name='оплаченный курс'),
+            model_name="payment",
+            name="paid_course",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="materials.course",
+                verbose_name="оплаченный курс",
+            ),
         ),
         migrations.AlterField(
-            model_name='payment',
-            name='paid_lesson',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='materials.lesson', verbose_name='оплаченный урок'),
+            model_name="payment",
+            name="paid_lesson",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="materials.lesson",
+                verbose_name="оплаченный урок",
+            ),
         ),
         migrations.AlterField(
-            model_name='payment',
-            name='payment_method',
-            field=models.CharField(choices=[('наличные', 'наличные'), ('перевод', 'перевод')], max_length=100, verbose_name='способ оплаты'),
+            model_name="payment",
+            name="payment_method",
+            field=models.CharField(
+                choices=[("наличные", "наличные"), ("перевод", "перевод")],
+                max_length=100,
+                verbose_name="способ оплаты",
+            ),
         ),
         migrations.AlterField(
-            model_name='payment',
-            name='user',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="payment",
+            name="user",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

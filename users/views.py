@@ -2,12 +2,13 @@ from django.shortcuts import render
 from django_filters import OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
+from rest_framework.generics import (CreateAPIView, DestroyAPIView,
+                                     ListAPIView, RetrieveAPIView,
+                                     UpdateAPIView)
 from rest_framework.permissions import AllowAny
 
+from users.models import Payment, User
 from users.serializers import PaymentSerializer, UserSerializer
-from users.models import Payment
-from users.models import User
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, UpdateAPIView, DestroyAPIView
 
 
 class UserCreateAPIView(CreateAPIView):
@@ -44,6 +45,7 @@ class PaymentCreateAPIView(generics.CreateAPIView):
     """
     создание платежа
     """
+
     serializer_class = PaymentSerializer
 
 
@@ -51,9 +53,14 @@ class PaymentListAPIView(generics.ListAPIView):
     """
     отображение списка платежей, с фильтрацией и сортировкой
     """
+
     serializer_class = PaymentSerializer
     queryset = Payment.objects.all()
 
     filter_backends = [DjangoFilterBackend, OrderingFilter]
-    filterset_fields = ('paid_course', 'paid_lesson', 'payment_method',)
-    ordering_fields = ('date_payment',)
+    filterset_fields = (
+        "paid_course",
+        "paid_lesson",
+        "payment_method",
+    )
+    ordering_fields = ("date_payment",)
