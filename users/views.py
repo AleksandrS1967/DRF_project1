@@ -42,9 +42,7 @@ class UserDestroyAPIView(DestroyAPIView):
 
 
 class PaymentCreateAPIView(generics.CreateAPIView):
-    """
-    создание платежа
-    """
+    """создание платежа"""
 
     serializer_class = PaymentSerializer
 
