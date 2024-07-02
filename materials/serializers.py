@@ -3,9 +3,11 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework.fields import SerializerMethodField
 
 from materials.models import Course, Lesson
+from materials.validators import validate_forbidden_words
 
 
 class LessonSerializer(ModelSerializer):
+    url = serializers.CharField(validators=[validate_forbidden_words])
 
     class Meta:
         model = Lesson
@@ -15,6 +17,7 @@ class LessonSerializer(ModelSerializer):
 class CourseSerializer(ModelSerializer):
     quantity_lessons = serializers.SerializerMethodField()
     lesson_list = LessonSerializer(source="lesson", many=True, read_only=True)
+    description = serializers.CharField(validators=[validate_forbidden_words])
 
     class Meta:
         model = Course
