@@ -1,10 +1,7 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from rest_framework.fields import SerializerMethodField
-
 from materials.models import Course, Lesson, Subscription
 from materials.validators import validate_forbidden_words
-from users.models import User
 
 
 class LessonSerializer(ModelSerializer):
