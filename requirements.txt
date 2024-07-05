@@ -9,3 +9,5 @@ coverage
 setuptools
 django-cors-headers
 requests
+drf_yasg
+stripe
