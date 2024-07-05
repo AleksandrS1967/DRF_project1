@@ -9,7 +9,7 @@ def create_stripe_product(product):
     """Создает продукт в stripe(урок или курс)"""
 
     title_product = (
-        f"{product.paid_course}" if product.paid_course else product.paid_lesson
+        product.paid_course if product.paid_course else product.paid_lesson
     )
     stripe_product = stripe.Product.create(name=f"{title_product}")
     return stripe_product.get("id")
