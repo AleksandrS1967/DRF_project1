@@ -152,6 +152,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
 
+EMAIL_HOST = "smtp.yandex.ru"
+EMAIL_PORT = 465
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("PASSWORD_")
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=999),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
@@ -166,10 +173,17 @@ CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
 
 # Часовой пояс для работы Celery
-CELERY_TIMEZONE = "Australia/Tasmania"
+CELERY_TIMEZONE = "Europe/Moscow"
 
 # Флаг отслеживания выполнения задач
 CELERY_TASK_TRACK_STARTED = True
 
 # Максимальное время на выполнение задачи
 CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'materials.tasks.filter_last_login',  # Путь к задаче
+        'schedule': timedelta(seconds=10),  # Расписание выполнения задачи (например, каждые 10 минут)
+    },
+}

@@ -24,6 +24,8 @@ class User(AbstractUser):
         help_text="Загрузите аватар",
         **NULLABLE
     )
+    last_login = models.DateTimeField(auto_now=True, verbose_name="Время последнего посещения",
+                                      **NULLABLE)
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
