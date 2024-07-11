@@ -33,6 +33,7 @@ def update_message(pk):
                 )
 
 
+@shared_task
 def filter_last_login():
     users = User.objects.all()
     if users:
