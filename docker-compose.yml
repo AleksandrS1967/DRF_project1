@@ -2,7 +2,7 @@ version: "3"
 
 services:
 
-  redis:
+  redis:  # контейнер для redis, поменять local host в .env на redis
     image: redis:latest
     restart: on-failure
     expose:
